@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  transmute:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - TM_API_KEY=${TM_API_KEY:-}
+      - TM_LOG_LEVEL=INFO
+    volumes:
+      - ./.transmute:/app/.transmute
+      - ./zircon:/app/zircon
+    restart: unless-stopped

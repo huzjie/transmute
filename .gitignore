@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# 运行时
+*.log
+data/runs/
+.cache/
+.state/
+.work/
+
+# 环境
+.env
+.env.local
+
+# 迁移产物（候选/计划可由用户决定是否提交）
+.migrate/
+
+# IDE
+.idea/
+.vscode/
+*.swp

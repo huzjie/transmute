@@ -1,0 +1,6 @@
+apiVersion: v2
+name: transmute
+description: 多智能体验证式代码迁移编排引擎
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

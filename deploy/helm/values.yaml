@@ -1,0 +1,17 @@
+replicaCount: 1
+image:
+  repository: huzjie/transmute
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 8000
+resources:
+  limits:
+    cpu: 1
+    memory: 1Gi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+env:
+  TM_API_KEY: ""

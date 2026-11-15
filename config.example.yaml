@@ -1,0 +1,31 @@
+# transmute 参考配置（复制为 config.yaml 后按需修改）
+llm:
+  provider: openai_compat          # openai_compat / anthropic / mock
+  base_url: http://localhost:11434/v1
+  model: qwen3.8
+  api_key_env: TM_API_KEY
+  temperature: 0.2
+
+migration:
+  root: ./zircon                   # 目标代码库
+  source_lang: cpp
+  target_lang: rust
+  plan_file: ./migration.plan.json
+  max_parallel: 4                  # 并行子任务数
+
+gates:
+  compile: { command: "cargo build", timeout: 300 }
+  test:    { command: "cargo test", timeout: 600 }
+  lint:    { command: "cargo clippy -- -D warnings", timeout: 300 }
+
+agents:
+  generator: { model: qwen3.8, max_retries: 3 }
+  reviewer:  { model: qwen3.8, strictness: high }
+
+scopes:
+  allow_network: false
+  read_only_outside_target: true
+
+serve:
+  host: 127.0.0.1
+  port: 8000

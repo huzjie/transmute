@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmute
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transmute
+  template:
+    metadata:
+      labels:
+        app: transmute
+    spec:
+      containers:
+        - name: transmute
+          image: huzjie/transmute:0.1.0
+          ports:
+            - containerPort: 8000
+          env:
+            - name: TM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: transmute-secrets
+                  key: api_key
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: transmute
+spec:
+  selector:
+    app: transmute
+  ports:
+    - port: 8000
+      targetPort: 8000
+  type: ClusterIP

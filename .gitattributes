@@ -1,0 +1,5 @@
+# 文本文件统一换行
+*.py text eol=lf
+*.md text eol=lf
+*.rs text eol=lf
+*.sh text eol=lf

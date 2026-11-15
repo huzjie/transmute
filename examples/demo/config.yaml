@@ -1,0 +1,19 @@
+llm:
+  provider: mock          # 先 mock 跑通链路，再换真实端点
+  model: mock
+
+migration:
+  root: .
+  source_lang: cpp
+  target_lang: rust
+  plan_file: migration.plan.json
+  max_parallel: 2
+
+gates:
+  compile: { command: "echo compile-ok", timeout: 10 }
+  test:    { command: "echo test-ok", timeout: 10 }
+  lint:    { command: "echo lint-ok", timeout: 10 }
+
+agents:
+  generator: { model: mock, max_retries: 3 }
+  reviewer:  { model: mock, strictness: high }
